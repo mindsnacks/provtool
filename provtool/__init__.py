@@ -34,16 +34,28 @@ def path(name, path=DEFAULT_PROVPROF_DIR):
             plist = plistlib.readPlistFromString(plistString)
             if plist['Name'] == name:
                 print filePath
-           
-COMMANDS = ('list', 'path')
+
+def uuid(path):
+    fullpath = os.path.expanduser(path)
+    if not isProvFile(fullpath):
+        err = '%s is not a Provisioning Profile' % (fullpath)
+        #sys.stderr.write(err)
+        raise ValueError(err) #TODO: ValueError the right kind of exception?
+        return
+    plistString = plistStringFromProvFile(fullpath)
+    plist = plistlib.readPlistFromString(plistString)
+    print plist['UUID']
+
+COMMANDS = ('list', 'path', 'uuid')
 
 def usage(command=None):
     print """
 usage: provtool <subcommand>
 
 Available subcommands are:
-    list    List installed Provisiong Profiles.
-    path    Get the path of a Provisioning Profile by name.
+    list            List installed Provisining Profiles.
+    path <name>     Get the path(s) of Provisioning Profile by name.
+    uuid <path>     Display the UDID of a Provisioning Profile by path.
 """
 
 def main():
@@ -62,6 +74,13 @@ def main():
             exit(1)
         else:
             path(sys.argv[2])
+    elif command == 'uuid':
+        if len(sys.argv) < 2:
+            usage(command)
+            exit(1)
+        else:
+            uuid(sys.argv[2])
+
 
 if __name__ == "__main__":
     main()
