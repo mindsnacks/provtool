@@ -1,6 +1,6 @@
 Installation
 ------------
 
-For now do:
+This should work:
 
-    sudo pip install -U -e git+ssh://git@github.com/mindsnacks/provtool.git#egg=provtool
+    pip install -U git+ssh://git@github.com/mindsnacks/provtool.git#egg=provtool
