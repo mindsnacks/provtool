@@ -21,18 +21,16 @@ def plistStringFromProvFile(path):
     end = data.rindex(endToken) + len(endToken) 
     return data[begin:end]
 
-def list(dir=DEFAULT_PROVPROF_DIR):
-    for f in os.listdir(dir):
-        if isProvFile(f):
-            print f
+def name(filePath):
+    plistString = plistStringFromProvFile(filePath)
+    plist = plistlib.readPlistFromString(plistString)
+    return plist['Name']
 
-def path(name, path=DEFAULT_PROVPROF_DIR):
+def path(provName, path=DEFAULT_PROVPROF_DIR):
     for f in os.listdir(path):
         if isProvFile(f):
             filePath = os.path.join(path, f)
-            plistString = plistStringFromProvFile(filePath)
-            plist = plistlib.readPlistFromString(plistString)
-            if plist['Name'] == name:
+            if name(filePath) == provName:
                 print filePath
 
 def uuid(path):
@@ -45,6 +43,12 @@ def uuid(path):
     plistString = plistStringFromProvFile(fullpath)
     plist = plistlib.readPlistFromString(plistString)
     print plist['UUID']
+
+def list(dir=DEFAULT_PROVPROF_DIR):
+    print "%s:" % dir
+    for f in os.listdir(dir):
+        if isProvFile(f):
+            print "%s : '%s'" % (f, name(os.path.join(dir, f)))
 
 COMMANDS = ('list', 'path', 'uuid')
 
