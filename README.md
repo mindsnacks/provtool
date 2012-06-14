@@ -3,7 +3,7 @@ Installation
 
 This should work:
 
-    pip install -U -e git+https://github.com/mindsnacks/provtool.git#egg=provtool
+    (sudo) pip install -I git+https://github.com/mindsnacks/provtool.git#egg=provtool
 
 Features
 --------
