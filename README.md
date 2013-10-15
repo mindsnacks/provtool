@@ -21,8 +21,8 @@ Examples
 --------
 
 	$ provtool list
-	EBB1133B-C2A2-4A8F-ADE6-E7930E2DED49.mobileprovision > 'MyApp Ad Hoc'
-	FA13FEF3-6286-4F70-B820-F89C3C030D8A.mobileprovision > 'MyApp App Store'
+	EBB1133B-C2A2-4A8F-ADE6-E7930E2DED49.mobileprovision : 'MyApp Ad Hoc'
+	FA13FEF3-6286-4F70-B820-F89C3C030D8A.mobileprovision : 'MyApp App Store'
 
 	$ provtool path "MyApp App Store"
 	/Users/me/Library/MobileDevice/Provisioning Profiles/FA13FEF3-6286-4F70-B820-F89C3C030D8A.mobileprovision
